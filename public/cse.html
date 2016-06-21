@@ -1,0 +1,66 @@
+<html>
+<head> <link href="favicon.png" rel="shortcut icon">
+  <link href="http://fonts.googleapis.com/css?family=Roboto|Montserrat:400,700|Open+Sans:400,300,600" rel="stylesheet">
+  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="http://cdn.jsdelivr.net/animatecss/3.2.0/animate.css" rel="stylesheet">
+  <link href="/stylesheets/angular-toastr.css" rel="stylesheet">
+  <link href="/stylesheets/styles.css" rel="stylesheet"></head>
+<body ng-app="MyApp">
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">Google CSE </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-6">		
+					<div class="ng-cloak row" ng-hide="auth.isLoggedIn()">
+						<div class="col s10 push-s1">
+							<div ng-controller="PostsCtrl">
+								<h4>{{title}}</h4>
+						
+							    <div ng-repeat="img in posts">
+								    <img class="img-responsive" src="{{img.link}}" />
+							    </div>
+							</div>
+						</div>
+				    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+		
+		<!-- Third-party Libraries -->
+<script src="/vendor/angular.js"></script>
+<script src="/vendor/angular-animate.js"></script>
+<script src="/vendor/angular-messages.js"></script>
+<script src="/vendor/angular-resource.js"></script>
+<script src="/vendor/angular-sanitize.js"></script>
+<script src="/vendor/angular-ui-router.js"></script>
+<script src="/vendor/angular-toastr.tpls.js"></script>
+<script src="/vendor/satellizer.js"></script>
+<script>
+	
+
+
+		var app = angular.module("MyApp", []);
+		app.controller("PostsCtrl", function($scope, $http) {
+		  $http.get('https://www.googleapis.com/customsearch/v1?key=AIzaSyDW2WlXY8pP89GKA3tH4fH9dDiWE8H6G1I&cx=003482793751288746519:oyeo8dsb7ve&q=uluwatu&searchType=image&fileType=jpg&imgSize=xxlarge&alt=json').
+		    success(function(data, status, headers, config) {
+		      $scope.posts = data.items;
+		      $scope.title = data.queries.request[0].title;
+		      $scope.results = data.queries.request[0].totalResults;
+		    }).
+		    error(function(data, status, headers, config) {
+		      // log error
+		    });
+		});
+
+
+
+			
+		</script>
+</body>
+</html>

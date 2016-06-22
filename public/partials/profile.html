@@ -6,6 +6,7 @@
       <form method="post" ng-submit="updateProfile()">
         <div class="form-group">
           <label class="control-label">Profile Picture</label>
+        
           <img class="profile-picture" ng-src="{{user.picture || 'http://placehold.it/100x100'}}">
         </div>
         <div class="form-group">
@@ -40,7 +41,7 @@
           <i class="ion-social-googleplus"></i> Link Google Account
         </button>
 
-        <button class="btn btn-sm btn-danger" ng-if="user.linkedin" ng-click="unlink('linkedin')">
+        <!-- <button class="btn btn-sm btn-danger" ng-if="user.linkedin" ng-click="unlink('linkedin')">
           <i class="ion-social-linkedin"></i> Unlink LinkedIn Account
         </button>
         <button class="btn btn-sm btn-primary" ng-if="!user.linkedin" ng-click="link('linkedin')">
@@ -101,7 +102,7 @@
         </button>
         <button class="btn btn-sm btn-primary" ng-if="!user.twitch" ng-click="link('bitbucket')">
           <i class="fa fa-bitbucket"></i> Link Bitbucket Account
-        </button>
+        </button> -->
       </div>
     </div>
   </div>

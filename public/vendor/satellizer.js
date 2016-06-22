@@ -43,6 +43,24 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
           oauthType: '2.0',
           popupOptions: { width: 580, height: 400 }
         },
+        googlecse: {
+          name: 'googlecse',
+          url: '/auth/google',
+          authorizationEndpoint: 'https://accounts.google.com/o/oauth2/auth',
+          redirectUri: window.location.origin,
+          requiredUrlParams: ['scope'],
+          optionalUrlParams: ['display', 'state'],
+          scope: ['profile', 'email'],
+          scopePrefix: 'openid',
+          scopeDelimiter: ' ',
+          display: 'popup',
+          oauthType: '2.0',
+          popupOptions: { width: 452, height: 633 },
+          state: function() {
+            var rand = Math.random().toString(36).substr(2);
+            return encodeURIComponent(rand);
+          }
+        },
         google: {
           name: 'google',
           url: '/auth/google',

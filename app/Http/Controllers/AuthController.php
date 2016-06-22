@@ -229,6 +229,28 @@ class AuthController extends Controller {
 
             return response()->json(['token' => $this->createToken($user)]);
         }
+    }/**
+     * Login with Google CSE.
+     */
+    public function google_cse(Request $request)
+    {
+        $client = new GuzzleHttp\Client();
+
+        $params = [
+            'code' => $request->input('code'),
+            'client_id' => $request->input('clientId'),
+            'client_secret' => Config::get('app.google_secret'),
+            // 'redirect_uri' => $request->input('redirectUri'),
+            'grant_type' => 'authorization_code',
+        ];
+
+        // Step 1. Exchange authorization code for access token.
+        $accessTokenResponse = $client->request('POST', 'https://accounts.google.com/o/oauth2/token', [
+            'form_params' => $params
+        ]);
+        $accessToken = json_decode($accessTokenResponse->getBody(), true);
+        return response()->json(['token' => $accessToken]);
+       
     }
 
     /**
